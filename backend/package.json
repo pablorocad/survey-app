@@ -1,0 +1,22 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "This is the backend to create surveys and save answers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pablorocad/survey-app.git"
+  },
+  "keywords": [
+    "survey"
+  ],
+  "author": "Pablo Roca",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pablorocad/survey-app/issues"
+  },
+  "homepage": "https://github.com/pablorocad/survey-app#readme"
+}
