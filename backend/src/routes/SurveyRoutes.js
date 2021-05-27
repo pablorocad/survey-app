@@ -2,6 +2,9 @@
 //Imports===============================================================================
 //======================================================================================
 const express = require('express');
+const fs = require('fs');
+
+let surveyData = require('../data/SurveyData.json');
 
 //======================================================================================
 //Configuration=========================================================================
@@ -13,7 +16,19 @@ const URL = '/survey'
 //Endpoints=========================================================================
 //======================================================================================
 surveyRouter.get(URL,(req,res) => {
-    res.send('Surveys')
+    res.json(surveyData);
+});
+
+surveyRouter.post(`${URL}`, (req,res) => {
+    fs.writeFile('./src/data/SurveyData.json',
+        `{"message":"mensaje"}`,
+        (err) => {
+            if(err){
+                res.send(err);
+            }
+            res.json({message:'Guardado'})
+        }
+    );
 });
 
 module.exports = surveyRouter;
