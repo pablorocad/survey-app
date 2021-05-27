@@ -6,12 +6,12 @@ const express = require('express');
 //======================================================================================
 //Configuration=========================================================================
 //======================================================================================
-const router = express.Router();
+const surveyRouter = express.Router();
 const URL = '/survey'
 
 
-router.get(URL,(req,res) => {
+surveyRouter.get(URL,(req,res) => {
     res.send('Surveys')
 });
 
-module.exports = router;
+module.exports = surveyRouter;
