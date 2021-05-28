@@ -4,7 +4,7 @@
 const express = require('express');
 var bodyParser = require('body-parser')
 const surveyRouter = require('./routes/SurveyRoutes');
-
+const questionRouter = require('./routes/QuestionRoutes');
 
 //======================================================================================
 //Configuration=========================================================================
@@ -25,6 +25,7 @@ app.get('/',(req,res) => {
 
 //Survey endpoints
 app.use(surveyRouter);
+app.use(questionRouter);
 
 //======================================================================================
 //Listen================================================================================
