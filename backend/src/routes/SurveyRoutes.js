@@ -4,6 +4,7 @@
 const express = require('express');
 const fs = require('fs');
 var md5 = require('md5');
+const fetch = require('node-fetch')
 
 let surveyData = require('../data/SurveyData.json');
 
@@ -26,6 +27,22 @@ surveyRouter.post(`${URL}`, (req,res) => {
     } catch (error) {
         res.send(error);
     }
+
+    const id_survey = surveyData[surveyData.length - 1].id;
+
+    req.body.questions.forEach(async question => {
+        question.survey = id_survey;
+
+        await fetch('http://localhost:3000/question',
+        {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, *cors, same-origin
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(question)
+        });
+    });
 
     res.send('Success')
 });
