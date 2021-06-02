@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import Form from 'react-bootstrap/Form';
 
+//<ElementForm question="¿Maneja Carro?" type="s" answers={[{answer:"Si"},{answer:"No"}]}></ElementForm>
+
 export default class ElementForm extends Component {
     
-    state = {
-        question: this.props.question,
-        type: this.props.type,
-        answers: this.props.answers
+    constructor(props){
+        super(props);
+
+        this.state = {
+            question: props.question,
+            type: props.type,
+            answers: props.answers
+        }
     }
 
     generateField(props) {
@@ -17,7 +23,7 @@ export default class ElementForm extends Component {
             return(<Form.Check
                 type="radio"
                 label={ans.answer}
-                key={ans.answer}
+                key={i}
               />);
         })
     }
