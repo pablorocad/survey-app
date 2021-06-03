@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Form from 'react-bootstrap/Form';
 
-//<ElementForm question="¿Maneja Carro?" type="s" answers={[{answer:"Si"},{answer:"No"}]}></ElementForm>
-
 export default class ElementForm extends Component {
     
     constructor(props){

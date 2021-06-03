@@ -40,11 +40,14 @@ class CreateSurvey extends Component {
     }
 
     addQuestion(){
-        const arrayQuestions = this.state.questions;
+        if(!this.state.values[this.state.creators]) {
+            alert('Insert a question')
+            return;
+        }
 
+        const arrayQuestions = this.state.questions;
         arrayQuestions.pop();
         arrayQuestions.pop();
-        
         if(this.state.values[this.state.creators + 1]){
             console.log(this.state.values[this.state.creators],this.state.values[this.state.creators + 1]);
         }
@@ -56,7 +59,6 @@ class CreateSurvey extends Component {
                 answers: [],
             });
         }
-
         this.setState({questions: [], values:[], creators: this.state.creators + 1}, () => {
             arrayQuestions.push({
                 question: "Question:",
@@ -70,6 +72,10 @@ class CreateSurvey extends Component {
             });
             this.setState({questions: arrayQuestions});
         });
+    }
+
+    finishSurvey(){
+        alert('FINISH')
     }
 
     listQuestions(){
@@ -92,7 +98,12 @@ class CreateSurvey extends Component {
                         {this.listQuestions()}
                     </Form>
                     <div className="d-flex justify-content-center">
-                        <Button variant="success" onClick={() => this.addQuestion()}>+</Button>
+                        <div className="p-1">
+                            <Button variant="success" onClick={() => this.addQuestion()}>Add question</Button>
+                        </div>
+                        <div className="p-1">
+                            <Button variant="warning" onClick={() => this.finishSurvey()}>Finish survey</Button>
+                        </div>
                     </div>
                 </div>
             </div>
