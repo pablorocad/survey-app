@@ -21,6 +21,21 @@ surveyRouter.get(URL,(req,res) => {
     res.json(surveyData);
 });
 
+/*
+survey:
+{
+    name:''
+    questions:[]
+}
+
+question:
+{
+    question:'',
+    type:'',
+    answers:[{answer:''},{answer:''}]
+}
+*/
+
 surveyRouter.post(`${URL}`, (req,res) => {
     try {
         createSurvey(req);
@@ -33,7 +48,7 @@ surveyRouter.post(`${URL}`, (req,res) => {
     req.body.questions.forEach(async question => {
         question.survey = id_survey;
 
-        await fetch('http://localhost:3000/question',
+        await fetch('http://localhost:2080/question',
         {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, *cors, same-origin

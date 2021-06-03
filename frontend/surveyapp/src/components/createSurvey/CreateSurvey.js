@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import './CreateSurvey.css';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-
 import ElementForm from '../elementForm/ElementForm';
 
+const fetch = require('node-fetch')
 class CreateSurvey extends Component {
 
     constructor(props) {
@@ -14,8 +14,13 @@ class CreateSurvey extends Component {
 
         this.state = {
             values: [],
-            creators: 0,
+            creators: 1,
             questions: [
+                {
+                    question: "Survey name:",
+                    type: "n",
+                    answers: [],
+                },
                 {
                     question: "Question:",
                     type: "n",
@@ -59,7 +64,7 @@ class CreateSurvey extends Component {
                 answers: [],
             });
         }
-        this.setState({questions: [], values:[], creators: this.state.creators + 1}, () => {
+        this.setState({questions: [this.state.questions[0]], values:[this.state.values[0]], creators: this.state.creators + 1}, () => {
             arrayQuestions.push({
                 question: "Question:",
                 type: "n",
@@ -74,8 +79,28 @@ class CreateSurvey extends Component {
         });
     }
 
-    finishSurvey(){
-        alert('FINISH')
+    async finishSurvey(){
+
+        const questionsArray = this.state.questions;
+        questionsArray.shift();
+        questionsArray.pop();
+        questionsArray.pop();
+        const newSurvey = {
+            name: this.state.values[0],
+            questions: questionsArray
+        };
+
+        console.log(newSurvey)
+
+        await fetch('http://localhost:2080/survey',
+        {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, *cors, same-origin
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newSurvey)
+        });
     }
 
     listQuestions(){
