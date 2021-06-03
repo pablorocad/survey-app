@@ -14,6 +14,7 @@ class CreateSurvey extends Component {
 
         this.state = {
             values: [],
+            creators: 0,
             questions: [
                 {
                     question: "Question:",
@@ -41,18 +42,34 @@ class CreateSurvey extends Component {
     addQuestion(){
         const arrayQuestions = this.state.questions;
 
-        arrayQuestions.push({
-            question: "Question:",
-            type: "n",
-            answers: [],
-        },
-        {
-            question: "Answers:",
-            type: "t",
-            answers: [],
-        });
+        arrayQuestions.pop();
+        arrayQuestions.pop();
+        
+        if(this.state.values[this.state.creators + 1]){
+            console.log(this.state.values[this.state.creators],this.state.values[this.state.creators + 1]);
+        }
+        else{
+            console.log(this.state.values[this.state.creators]);
+            arrayQuestions.push({
+                question: this.state.values[this.state.creators],
+                type: "n",
+                answers: [],
+            });
+        }
 
-        this.setState({questions: arrayQuestions});
+        this.setState({questions: [], values:[], creators: this.state.creators + 1}, () => {
+            arrayQuestions.push({
+                question: "Question:",
+                type: "n",
+                answers: [],
+            },
+            {
+                question: "Answers:",
+                type: "t",
+                answers: [],
+            });
+            this.setState({questions: arrayQuestions});
+        });
     }
 
     listQuestions(){
