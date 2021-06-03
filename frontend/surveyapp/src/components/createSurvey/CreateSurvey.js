@@ -10,21 +10,46 @@ class CreateSurvey extends Component {
     constructor(props) {
         super(props);
 
+        this.handleChange = this.handleChange.bind(this);
+
         this.state = {
-            questions: []
+            values: [],
+            questions: [
+                {
+                    question: "Question:",
+                    type: "n",
+                    answers: [],
+                },
+                {
+                    question: "Answers:",
+                    type: "t",
+                    answers: [],
+                }
+            ]
         }
     }
 
-    addQuestion(){
+    handleChange(event) {
 
+        const arrayValues = this.state.values;
+
+        arrayValues[event.target.name] = event.target.value;
+        this.setState({values: arrayValues});
+        
+    }
+
+    addQuestion(){
         const arrayQuestions = this.state.questions;
 
         arrayQuestions.push({
-            id: "4848538ed287c535dcf2d85b033f56a3",
-            question: "Nombre",
+            question: "Question:",
             type: "n",
             answers: [],
-            survey: "10a394fb4a6f53329c45f521f0504a49"
+        },
+        {
+            question: "Answers:",
+            type: "t",
+            answers: [],
         });
 
         this.setState({questions: arrayQuestions});
@@ -35,7 +60,8 @@ class CreateSurvey extends Component {
         return (
             arrayQuestions.map((qu,index) => {
                 return (
-                    <ElementForm question={qu.question} type={qu.type} answers={qu.answers} key={index}></ElementForm>
+                    <ElementForm question={qu.question} type={qu.type} answers={qu.answers} key={index} code={index}
+                    onChangeValue={this.handleChange}></ElementForm>
                 );
             })
         );
@@ -45,17 +71,13 @@ class CreateSurvey extends Component {
         return (
             <div className="d-flex justify-content-center">
                 <div className="container-form">
-                    
                     <Form>
                         {this.listQuestions()}
                     </Form>
-
                     <div className="d-flex justify-content-center">
                         <Button variant="success" onClick={() => this.addQuestion()}>+</Button>
                     </div>
-
                 </div>
-        
             </div>
         )
     }
