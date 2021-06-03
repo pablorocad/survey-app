@@ -10,7 +10,7 @@ const questionRouter = require('./routes/QuestionRoutes');
 //Configuration=========================================================================
 //======================================================================================
 const app = express();
-const PORT = 3000;
+const PORT = 2080;
 
 app.set('port',PORT);
 app.use(bodyParser.json());
